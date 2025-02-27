@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Guess</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <div id="specs" class="specs"></div>
+  <form>
+    <select id="phoneSelect">
+      <option value="Apple iPhone 16">Apple iPhone 16</option>
+      <option value="Apple iPhone 15">Apple iPhone 15</option>
+      <option value="Apple iPhone 14">Apple iPhone 14</option>
+      <option value="Apple iPhone 13">Apple iPhone 13</option>
+      <option value="Samsung Galaxy S25">Samsung Galaxy S25</option>
+      <option value="Samsung Galaxy S24">Samsung Galaxy S24</option>
+      <option value="Samsung Galaxy S23">Samsung Galaxy S23</option>
+    </select> 
+    <label for="phoneSelect">Choose Phone</label><br>
+    <button id="submitPhone" onclick=" event.preventDefault();guessPhone();">Guess!</button>
+  </form><br>
+  <div class="results"></div>
+  <script src="index.js"></script>
+</body>
+</html>
