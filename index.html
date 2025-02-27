@@ -50,6 +50,13 @@
     </script>
     <div class="center">
         <p id="phonespecs">Phone Specs</p>
+        <input list="phones" id="guessInput" name="phoneGuess" placeholder="Guess the phone...">
+        <datalist id="phones">
+            <option value="Google Pixel Fold">
+            <option value="Apple iPhone 16e">
+            <option value="Samsung S25 Ultra">
+            <option value="OnePlus 13">
+        </datalist>
         <p id="phonename" style="display:none;">Phone Name</p>
         <button id="revealButton" onclick="revealphone()">Reveal Phone</button>
     </div>
