@@ -35,10 +35,34 @@
         });
 
         function revealphone() {
+            let guessInput = document.getElementById("guessInput").value;
             let phoneNameElement = document.getElementById("phonename");
+            let feedbackElement = document.getElementById("feedback");
             let buttonElement = document.getElementById("revealButton");
+            
+            if (guessInput === "") {
+                feedbackElement.innerHTML = "Input cannot be empty.";
+                feedbackElement.style.display = "block";
+                return;
+            }
+
+            const validChoices = ["Google Pixel Fold", "Apple iPhone 16e", "Samsung S25 Ultra", "OnePlus 13"];
+            if (!validChoices.includes(guessInput)) {
+                feedbackElement.innerHTML = "Please enter a valid choice.";
+                feedbackElement.style.display = "block";
+                return;
+            }
+
+            let phoneselection = document.getElementById("phonename").innerHTML;
+            if (guessInput === phoneselection) {
+                feedbackElement.innerHTML = "You got it right!";
+            } else {
+                feedbackElement.innerHTML = "You got it wrong!";
+            }
+
             phoneNameElement.style.display = "block";
             phoneNameElement.classList.add("animate__animated", "animate__zoomIn");
+            feedbackElement.style.display = "block";
             buttonElement.style.display = "none";
             playSound();
         }
@@ -58,6 +82,7 @@
             <option value="OnePlus 13">
         </datalist>
         <p id="phonename" style="display:none;">Phone Name</p>
+        <p id="feedback" style="display:none;"></p>
         <button id="revealButton" onclick="revealphone()">Reveal Phone</button>
     </div>
 </body>
