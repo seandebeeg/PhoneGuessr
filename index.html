@@ -18,6 +18,19 @@
     </style>
 </head>
 <body>
+    <div class="center">
+        <p id="phonespecs">Phone Specs</p>
+        <input list="phones" id="guessInput" name="phoneGuess" placeholder="Guess the phone...">
+        <datalist id="phones">
+            <option value="Google Pixel Fold">
+            <option value="Apple iPhone 16e">
+            <option value="Samsung S25 Ultra">
+            <option value="OnePlus 13">
+        </datalist>
+        <p id="phonename" style="display:none;">Phone Name</p>
+        <p id="feedback" style="display:none;"></p>
+        <button id="revealButton" onclick="revealphone()">Reveal Phone</button>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const phones = ["Google Pixel Fold", "Apple iPhone 16e", "Samsung S25 Ultra", "OnePlus 13"];
@@ -28,41 +41,19 @@
                 "Oneplus 13 i will do this later lol 😂"
             ];
 
-            if (!phones.length || !phonespecs.length) {
-                console.error("Phones or phone specs array is empty.");
-                return;
-            }
+            const randomphone = Math.floor(Math.random() * phones.length);
+            const phoneselection = phones[randomphone];
+            const specselection = phonespecs[randomphone];
 
-            let randomphone = Math.floor(Math.random() * phones.length);
-            if (randomphone < 0 || randomphone >= phones.length) {
-                console.error("Random phone index is out of bounds.");
-                return;
-            }
-
-            let phoneselection = phones[randomphone];
-            let specselection = phonespecs[randomphone];
-
-            let phonespecsElement = document.getElementById("phonespecs");
-            let phonenameElement = document.getElementById("phonename");
-
-            if (phonespecsElement) {
-                phonespecsElement.innerHTML = specselection;
-            } else {
-                console.error("Element with ID 'phonespecs' not found.");
-            }
-
-            if (phonenameElement) {
-                phonenameElement.innerHTML = phoneselection;
-            } else {
-                console.error("Element with ID 'phonename' not found.");
-            }
+            document.getElementById("phonespecs").innerHTML = specselection;
+            document.getElementById("phonename").innerHTML = phoneselection;
         });
 
         function revealphone() {
-            let guessInput = document.getElementById("guessInput").value;
-            let phoneNameElement = document.getElementById("phonename");
-            let feedbackElement = document.getElementById("feedback");
-            let buttonElement = document.getElementById("revealButton");
+            const guessInput = document.getElementById("guessInput").value;
+            const phoneNameElement = document.getElementById("phonename");
+            const feedbackElement = document.getElementById("feedback");
+            const buttonElement = document.getElementById("revealButton");
 
             if (!feedbackElement || !phoneNameElement || !buttonElement) {
                 console.error("One or more necessary elements not found.");
@@ -82,12 +73,8 @@
                 return;
             }
 
-            let phoneselection = phoneNameElement.innerHTML;
-            if (guessInput === phoneselection) {
-                feedbackElement.innerHTML = "You got it right!";
-            } else {
-                feedbackElement.innerHTML = "You got it wrong!";
-            }
+            const phoneselection = phoneNameElement.innerHTML;
+            feedbackElement.innerHTML = guessInput === phoneselection ? "You got it right!" : "You got it wrong!";
 
             phoneNameElement.style.display = "block";
             phoneNameElement.classList.add("animate__animated", "animate__zoomIn");
@@ -98,24 +85,11 @@
         }
 
         function playSound() {
-            var audio = new Audio('../assets/sounds/correct.wav');
+            const audio = new Audio('../assets/sounds/correct.wav');
             audio.play().catch(err => {
                 console.error("Error playing sound: ", err);
             });
         }
     </script>
-    <div class="center">
-        <p id="phonespecs">Phone Specs</p>
-        <input list="phones" id="guessInput" name="phoneGuess" placeholder="Guess the phone...">
-        <datalist id="phones">
-            <option value="Google Pixel Fold">
-            <option value="Apple iPhone 16e">
-            <option value="Samsung S25 Ultra">
-            <option value="OnePlus 13">
-        </datalist>
-        <p id="phonename" style="display:none;">Phone Name</p>
-        <p id="feedback" style="display:none;"></p>
-        <button id="revealButton" onclick="revealphone()">Reveal Phone</button>
-    </div>
 </body>
 </html>
