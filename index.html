@@ -5,16 +5,16 @@
     <link rel="icon" type="image/x-icon" href="../assets/logos/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-    body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .center {
-        text-align: center;
-    }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .center {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -27,11 +27,35 @@
                 "200MP camera, 12/16gb ram - 5000mAh, Snapdragon 8 Elite - 6.9 inch screen",
                 "Oneplus 13 i will do this later lol 😂"
             ];
+
+            if (!phones.length || !phonespecs.length) {
+                console.error("Phones or phone specs array is empty.");
+                return;
+            }
+
             let randomphone = Math.floor(Math.random() * phones.length);
+            if (randomphone < 0 || randomphone >= phones.length) {
+                console.error("Random phone index is out of bounds.");
+                return;
+            }
+
             let phoneselection = phones[randomphone];
             let specselection = phonespecs[randomphone];
-            document.getElementById("phonespecs").innerHTML = specselection;
-            document.getElementById("phonename").innerHTML = phoneselection;
+
+            let phonespecsElement = document.getElementById("phonespecs");
+            let phonenameElement = document.getElementById("phonename");
+
+            if (phonespecsElement) {
+                phonespecsElement.innerHTML = specselection;
+            } else {
+                console.error("Element with ID 'phonespecs' not found.");
+            }
+
+            if (phonenameElement) {
+                phonenameElement.innerHTML = phoneselection;
+            } else {
+                console.error("Element with ID 'phonename' not found.");
+            }
         });
 
         function revealphone() {
@@ -39,7 +63,12 @@
             let phoneNameElement = document.getElementById("phonename");
             let feedbackElement = document.getElementById("feedback");
             let buttonElement = document.getElementById("revealButton");
-            
+
+            if (!feedbackElement || !phoneNameElement || !buttonElement) {
+                console.error("One or more necessary elements not found.");
+                return;
+            }
+
             if (guessInput === "") {
                 feedbackElement.innerHTML = "Input cannot be empty.";
                 feedbackElement.style.display = "block";
@@ -53,7 +82,7 @@
                 return;
             }
 
-            let phoneselection = document.getElementById("phonename").innerHTML;
+            let phoneselection = phoneNameElement.innerHTML;
             if (guessInput === phoneselection) {
                 feedbackElement.innerHTML = "You got it right!";
             } else {
@@ -64,12 +93,15 @@
             phoneNameElement.classList.add("animate__animated", "animate__zoomIn");
             feedbackElement.style.display = "block";
             buttonElement.style.display = "none";
+
             playSound();
         }
 
         function playSound() {
             var audio = new Audio('../assets/sounds/correct.wav');
-            audio.play();
+            audio.play().catch(err => {
+                console.error("Error playing sound: ", err);
+            });
         }
     </script>
     <div class="center">
