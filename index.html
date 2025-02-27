@@ -38,6 +38,7 @@
             let phoneNameElement = document.getElementById("phonename");
             let buttonElement = document.getElementById("revealButton");
             phoneNameElement.style.display = "block";
+            phoneNameElement.classList.add("animate__animated", "animate__zoomIn");
             buttonElement.style.display = "none";
             playSound();
         }
@@ -50,7 +51,7 @@
     <div class="center">
         <p id="phonespecs">Phone Specs</p>
         <p id="phonename" style="display:none;">Phone Name</p>
-        <button class="animate__animated active:animate__zoomIn id="revealButton" onclick="revealphone()">Reveal Phone</button>
+        <button id="revealButton" onclick="revealphone()">Reveal Phone</button>
     </div>
 </body>
 </html>
