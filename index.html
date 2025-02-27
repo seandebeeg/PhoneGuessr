@@ -38,6 +38,12 @@
             let buttonElement = document.getElementById("revealButton");
             phoneNameElement.style.display = "block";
             buttonElement.style.display = "none";
+            playSound();
+        }
+
+        function playSound() {
+            var audio = new Audio('../assets/sounds/correct.wav');
+            audio.play();
         }
     </script>
     <div class="center">
